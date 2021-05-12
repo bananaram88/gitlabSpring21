@@ -98,7 +98,11 @@ void flurbos(void);//Berenis Castruita
 void planets(void);//Berenis Castruita
 void goodBye(void);//Berenis Castruita
 
-
+//Room 10, Yoelin R
+void nameToUpper(char lowerName[], int length1, char uppername[], int length2);
+int nextGame(char name[], int length);
+void writeRegistration(void);
+//Room 10, Yoelin R
 
 
 int main(int argc, char *argv[])
@@ -740,24 +744,22 @@ int main(int argc, char *argv[])
 				}
 				break;
 			}
-			case 10:
+			case 10: // Yoelin R
 			{
 				while(choice != 99)
 				{
-					int x, y, z, i, j, k, priceActual, priceGuess;
+					int x, i = 0, priceActual, priceGuess;
 					char guess;
-					char upperName[28];
+					char upperName[50];
 					srand(time(NULL));
-	
-					for(i = 0; i<28; i++)
-					{
-						upperName[i] = toupper(name[i]);
-					}
+					int winner = 0;
+
+					nameToUpper(name, 258, upperName, 50);
 	
 					printf("\n$$$$$$ %s COME ON DOWN!! YOU'RE ON THE PRICE IS RIGHT!! $$$$$$\n", upperName);
 					puts(" : : doo dooo dooooOoOoOo, doo dooooo DoooOooooooo : :\n");
 					puts("\nBob Barker: Welcome contestants, let me show you the first item up for bid on the Price Is Right...\n");
-					puts("\nJohnny Olsen: It's a new stove! A gas stove designed for your pleasure by LG Electronics. It is 6.3 cu. ft., has a Smart Wi-Fi enabled fan, and a convection electric oven range with AirFry and EasyClean in Stainless Steel.\n");
+					puts("\nJohnny Olson: It's a new stove! A gas stove designed for your pleasure by LG Electronics. It is 6.3 cu. ft., has a Smart Wi-Fi enabled fan, and a convection electric oven range with AirFry and EasyClean in Stainless Steel.\n");
 					printf("\nBob Barker: Contestants please bid on it in dollars because we round off our retail prices to the nearest dollar.. %s what do you bid? ", name);
 					scanf("%d", &priceGuess);
 					
@@ -766,15 +768,47 @@ int main(int argc, char *argv[])
 					if(priceActual - priceGuess <= 200)
 					{
 						printf("\nBob Barker; The actual retail price is $%d, that means %s, you are the winner!\n", priceActual, name);
+						winner = nextGame(name, 50);
+						if(winner == 1)
+						{
+							writeRegistration();
+							
+						}
+						else
+						{
+							choice = 99;	
+						}
 					}
 					else
 					{
 						printf("\nBob Barker: The actual retail price is $%d, that means %s, you are not the winner, let's try again...\n", priceActual, name);
 					}
 
+					puts("\nProfessor, I could not find a clever way to incorporate an average or while loop in my game,\n"
+							"as I'm incredibly unimaginative. Safe to say I wasn't destined to be a game designer.\n"
+							"As a result, I am adding this pointless while loop here that sums numbers until 0 is entered,\n"
+					                "which will then be used to produce an average. Apologies!\n");
+					int userInput = 1, average = 0;
+
+					while(userInput != 0)
+					{
+						puts("Enter an integer to start average calculation (enter 0 to exit)");
+						scanf("%d", &userInput);
+						average = average + userInput;
+						i++;
+						if(userInput == 0)
+						{
+							i--;
+						}
+							
+					}
+					printf("\nAverage is %.2f\n", (double)average/(double)i);
+					choice = 99;
+
 				}
+				fclose(wPtr);
 				break;
-			}
+			} //end of Yoelin R
 			case 11:
 			{
 					int doorChoice;
@@ -3600,3 +3634,131 @@ void noteFromRick(void)//Berenis Castruita
 
 
 }
+
+//Room 10 Functions Start, Yoelin R
+void nameToUpper(char lowerName[], int length1, char upperName[], int length2)//Door 10, Yoelin R
+{
+
+		int i;
+
+		for(i = 0; i<28; i++)
+		{
+			upperName[i] = toupper(lowerName[i]);
+		}
+
+}
+
+int nextGame(char name[], int length) //Door 10, Yoelin R
+{
+	int priceGuess1, priceGuess2;
+
+	puts("\nBob Barker: Let's see what our next prize is on The Price Is Right :::dooo dooOoOoOo doooOoOo:::\n");
+	printf("\nJohnny Olson: Well %s, IT'S A NEW CAR!!! ::crowd goes wild::\n", name);
+	printf("The 2021 Tesla Model S, with a 387-520 mile range and up to 1,020 horsepower, the Model S is built for speed and range, \nwith beyond ludicrous acceleration, unparalleled performance and a refined design. \nThis beauty can be yours if the price is right!\n");
+	printf("\nNow %s, all you have to do to take home that car is correctly guess the first and second number of the price of that car\n", name);
+	printf("\n::YOUR FIRST SET OF NUMBERS TO CHOOSE FROM ARE 8, 7, 9, 5, CHOOSE WISELY:: ");
+	scanf("%d", &priceGuess1);
+
+	switch(priceGuess1)
+	{
+		case 8: 
+			puts("\nWomp Womp WoOoOommP ::sad trombones play::\n");
+			printf("\nBob Barker: I'm so sorry %s, that was not the correct answer but you did win the stove, thank you for playing the price is right.\n", name);
+			puts("\n***the room begins to fill with water, you must find another way out...::sonic underwater panic music ensues::***");
+			
+		case 9:
+			puts("\nDING DING DING DING DING!! ::audience goes wild::");
+			printf("\nBob Barker: Now %s, if you guess this second number correctly, the car is yours!\n", name);
+			printf("\n::YOUR NEXT SET OF NUMBERS TO CHOOSE FROM ARE 9, 4, 1, 5: ");
+			scanf("%d", &priceGuess2);
+
+			switch(priceGuess2)
+			{
+				case 9:
+					puts("\nWomp Womp WoOoOommP ::sad trombones play::\n");
+					printf("\nBob Barker: I'm so sorry %s, that was not the correct answer but you did win the stove, thank you for playing the price is right.\n", name);
+					puts("\n***the room begins to fill with water, you must find another way out...::sonic underwater panic music ensues::***");
+					
+				case 4:
+					puts("\nWomp Womp WoOoOommP ::sad trombones play::\n");
+					printf("\nBob Barker: I'm so sorry %s, that was not the correct answer but you did win the stove, thank you for playing the price is right.\n", name);
+					puts("\n***the room begins to fill with water, you must find another way out...::sonic underwater panic music ensues::***");
+					
+				case 1:
+					puts("\nDING DING DING DING DING!! ::audience goes wild::");
+					printf("\n%s, you've just won yourself a new CAR!!!\n", name);
+					return 1;
+				case 5: 
+					puts("\nWomp Womp WoOoOommP ::sad trombones play::\n");
+					printf("\nBob Barker: I'm so sorry %s, that was not the correct answer but you did win the stove, thank you for playing the price is right.\n", name);
+					puts("\n***the room begins to fill with water, you must find another way out...::sonic underwater panic music ensues::***");
+					
+			}
+				
+				
+		case 7: 
+			puts("\nWomp Womp WoOoOommP ::sad trombones play::\n");
+			printf("\nBob Barker: I'm so sorry %s, that was not the correct answer but you did win the stove, thank you for playing the price is right.\n", name);
+			puts("\n***the room begins to fill with water, you must find another way out...::sonic underwater panic music ensues::***");
+			
+		case 5: 
+			puts("\nWomp Womp WoOoOommP ::sad trombones play::\n");
+			printf("\nBob Barker: I'm so sorry %s, that was not the correct answer but you did win the stove, thank you for playing the price is right.\n", name);
+			puts("\n***the room begins to fill with water, you must find another way out...::sonic underwater panic music ensues::***\n");
+			
+		default:
+			puts("\nThat was an incorrect guess, the room is now continuing to fill with water\n");
+	}
+}
+
+void writeRegistration(void)//Door 10, Yoelin R
+{
+	int c;
+	char legalName[40], licenseNumber[10], address[150];
+	char specs[1000] = "****VEHICLE REGISTRATION****\n YEAR: 2021\n Make:Tesla\n Model: S\n VIN #: 283666283GHDY62376K\n Price Valuation: $91,990.00\n Owner Information:\n";
+	FILE *wPtr;
+
+	wPtr = fopen("newMail.txt", "w");
+
+	puts("\nCongratulations on winning your 2021 Tesla Model S, now for some legalities\n");
+	puts("\nDo you have a current/valid driver's license and legally allowed to drive a class c vehicle in the U.S.? Enter 0 for no and 1 for yes? ");
+	scanf("%d", &c);
+
+	if(c == 1)
+	{
+		puts("Great! Please fill out the following:\n");
+
+		puts("Full legal name: ");
+		fgets(legalName, 40, stdin);
+		puts("Driver's License Number: ");
+		fgets(licenseNumber, 10, stdin);
+		puts("Last, but not least, we need an address: ");				
+		fgets(address, 150, stdin);
+
+		fputs(specs, wPtr);
+		fputs(legalName, wPtr);
+		fputs(address, wPtr);
+		fputs(licenseNumber, wPtr);
+		
+		puts("\nGreat, you're all set, your new stove, car and mailed registration forms should arrive within 12-16 weeks, taxes on the vehicle must be paid in full before then.\n");
+		puts("\nCheck file newMail.txt for temporary information\n");
+
+		puts("\n::doooOoOoo dooo DooooOoOoOo tune fades::: It's a dream, the water is continuing to fill! QUICK! GET OUT!!!\n");
+
+		
+	}
+	else if(c == 0)
+	{
+		puts("Oh no, unfortunately we cannot release the vehicle to you without one, thanks for playing!\n");
+		puts("\n::doooOoOoo dooo DooooOoOoOo tune fades::: It's a dream, the water is continuing to fill! QUICK! GET OUT!!!\n");
+
+		
+	}
+	else
+	{
+		puts("Whoops! Looks like something went wrong, try again later!\n");
+	}
+
+	
+}
+//End of Room 10 Functions, Yoelin R
